@@ -1,0 +1,28 @@
+env:
+  TZ: America/Toronto
+service:
+  dns-tcp:
+    enabled: true
+    type: LoadBalancer
+  dns-udp:
+    enabled: true
+    type: LoadBalancer
+config:
+  upstream:
+    default:
+      - https://mozilla.cloudflare-dns.com/dns-query
+      - 1.1.1.1
+  blocking:
+    blackLists:
+      ads:
+        - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+    clientGroupsBlock:
+      default:
+        - ads
+  port: 53
+  httpPort: 4000
+  conditional:
+    mapping:
+      delport.pri: 10.0.0.1
+  queryLog:
+    type: none
