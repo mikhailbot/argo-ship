@@ -45,7 +45,7 @@ ingress:
   className: ""
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: true
+    traefik.ingress.kubernetes.io/router.tls: "true"
 
   hosts:
     - host: nginx.k3s.delport.pri
@@ -54,6 +54,11 @@ ingress:
           pathType: ImplementationSpecific
   tls:
     - secretName: nginx-tls
+      hosts:
+        - nginx.k3s.delport.pri
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
